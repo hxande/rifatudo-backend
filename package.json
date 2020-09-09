@@ -1,0 +1,13 @@
+{
+  "name": "rifatudo-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/hxande/rifatudo-backend.git",
+  "author": "Hugo <c1297097@bb.com.br>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.0"
+  }
+}
