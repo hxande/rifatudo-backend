@@ -4,6 +4,9 @@
   "main": "index.js",
   "repository": "https://github.com/hxande/rifatudo-backend.git",
   "author": "Hugo <c1297097@bb.com.br>",
+  "scripts": {
+    "dev": "node src/index.js"
+  },
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
