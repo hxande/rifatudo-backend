@@ -13,10 +13,9 @@ let db = new sqlite3.Database(dbPath);
 // qtd_ganhadores varchar(255)
 // duracao varchar(255)
 
-
 exports.insertRifas = function (data, callback) {
     db.run(`INSERT INTO rifas (id_produto, valor, qtd_cotas, qtd_cotas_g, qtd_cotas_m, qtd_ganhadores, duracao) VALUES(?,?,?,?,?,?,?)`,
-        [data.id_produto, data.valor, data.qtd_cotas, data.qtd_cotas_g, data.qtd_cotas_m, data.qtd_ganhadores, data.duracao ],
+        [data.id_produto, data.valor, data.qtd_cotas, data.qtd_cotas_g, data.qtd_cotas_m, data.qtd_ganhadores, data.duracao],
         function (err) {
             if (err) {
                 callback(err)

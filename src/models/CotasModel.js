@@ -11,8 +11,6 @@ let db = new sqlite3.Database(dbPath);
 // valor varchar(255)
 // status varchar(255)
 
-
-
 exports.insertCotas = function (data, callback) {
     db.run(`INSERT INTO cotas (id_rifa, id_usuario, num, valor, status) VALUES(?,?,?,?,?)`,
         [data.id_rifa, data.id_usuario, data.num, data.valor, data.status],

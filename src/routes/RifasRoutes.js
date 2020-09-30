@@ -3,11 +3,11 @@ const RifasController = require('../controllers/RifasController');
 
 rifasRoute = Router();
 
-// USUARIOS
+// RIFAS
 rifasRoute.get('/rifas', (req, res) => {
     function callback(row) {
         res.json(row);
-    }
+    } qua
     RifasController.selectAllRifas(callback);
 });
 
@@ -20,13 +20,8 @@ rifasRoute.get('/rifas/:id', (req, res) => {
 });
 
 rifasRoute.post('/rifas', (req, res) => {
-    console.log(req);
     const { data } = req.body;
-    function callback(row) {
-        console.log(row);
-        // res.json(row);
-    }
-    RifasController.insertRifas(data, callback);
+    RifasController.insertRifas(data);
 
     res.sendStatus(200);
 });

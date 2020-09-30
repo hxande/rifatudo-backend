@@ -1,17 +1,21 @@
-const CotasController = require("../models/CotasModel");
+const CotasModel = require("../models/CotasModel");
 
 exports.selectAllCotas = function (callback) {
-    CotasController.selectAllCotas(callback);
+    CotasModel.selectAllCotas(callback);
 };
 
 exports.selectIdCotas = function (idCotas, callback) {
-    CotasController.selectIdCotas(idCotas, callback);
+    CotasModel.selectIdCotas(idCotas, callback);
 };
 
-exports.insertCotas = function (data, callback) {
-    CotasController.insertCotas(data, callback);
+exports.insertCotas = function (data) {
+    function callback(id_cota) {
+        console.log("Insert Cota " + id_cota);
+    }
+
+    CotasModel.insertCotas(data, callback);
 };
 
 exports.deleteCotas = function (idCotas) {
-    CotasController.deleteCotas(idCotas);
+    CotasModel.deleteCotas(idCotas);
 };
