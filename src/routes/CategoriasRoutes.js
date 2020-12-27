@@ -3,15 +3,15 @@ const CategoriasController = require('../controllers/CategoriasController');
 
 categoriasRoute = Router();
 
-// USUARIOS
-categoriasRoute.get('/categories', (req, res) => {
+// CATEGORIAS
+categoriasRoute.get('/categorias', (req, res) => {
     function callback(row) {
         res.json(row);
     }
     CategoriasController.selectAllCategorias(callback);
 });
 
-categoriasRoute.get('/categories/:id', (req, res) => {
+categoriasRoute.get('/categorias/:id', (req, res) => {
     const { id } = req.params;
     function callback(row) {
         res.json(row);
@@ -19,8 +19,7 @@ categoriasRoute.get('/categories/:id', (req, res) => {
     CategoriasController.selectIdCategorias(id, callback);
 });
 
-categoriasRoute.post('/categories', (req, res) => {
-    console.log(req);
+categoriasRoute.post('/categorias', (req, res) => {
     const { data } = req.body;
     function callback(row) {
         console.log(row);
@@ -31,7 +30,7 @@ categoriasRoute.post('/categories', (req, res) => {
     res.sendStatus(200);
 });
 
-categoriasRoute.delete('/categories/:id', (req, res) => {
+categoriasRoute.delete('/categorias/:id', (req, res) => {
     const { id } = req.params;
     CategoriasController.deleteCategorias(id);
 

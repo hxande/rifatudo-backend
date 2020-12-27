@@ -1,12 +1,11 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const dbPath = path.resolve(__dirname, '../db/rifatudo');
-let db = new sqlite3.Database(dbPath);
+const db = new sqlite3.Database(dbPath);
 
 // Table categorias
 // ID INTEGER PRIMARY KEY AUTOINCREMENT
 // nome varchar(255)
-
 
 exports.insertCategorias = function (data, callback) {
     db.run(`INSERT INTO categorias (nome) VALUES(?)`,
@@ -44,8 +43,8 @@ exports.selectIdCategorias = function (idCategorias, callback) {
     });
 }
 
-exports.deleteCategorias = function (idUsuarios) {
-    db.run(`DELETE FROM categorias WHERE ID == ${idUsuarios}`, function (err) {
+exports.deleteCategorias = function (idCategorias) {
+    db.run(`DELETE FROM categorias WHERE ID == ${idCategorias}`, function (err) {
         if (err != null) {
             console.log(err);
         }

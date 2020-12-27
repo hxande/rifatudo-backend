@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const dbPath = path.resolve(__dirname, '../db/rifatudo');
-let db = new sqlite3.Database(dbPath);
+const db = new sqlite3.Database(dbPath);
 
 // Table produtos
 // ID INTEGER PRIMARY KEY AUTOINCREMENT
@@ -15,7 +15,7 @@ let db = new sqlite3.Database(dbPath);
 // status varchar(255)
 
 exports.insertProdutos = function (data, callback) {
-    db.run(`INSERT INTO produtos (id_usuario,nome, descricao, id_categoria, id_subcategoria, uf, cidade, status) VALUES(?,?,?,?,?,?,?,?)`,
+    db.run(`INSERT INTO produtos (id_usuario, nome, descricao, id_categoria, id_subcategoria, uf, cidade, status) VALUES(?,?,?,?,?,?,?,?)`,
         [data.id_usuario, data.nome, data.descricao, data.id_categoria, data.id_subcategoria, data.uf, data.cidade, data.status],
         function (err) {
             if (err) {

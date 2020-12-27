@@ -7,7 +7,7 @@ rifasRoute = Router();
 rifasRoute.get('/rifas', (req, res) => {
     function callback(row) {
         res.json(row);
-    } qua
+    }
     RifasController.selectAllRifas(callback);
 });
 

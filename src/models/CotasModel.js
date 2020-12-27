@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const dbPath = path.resolve(__dirname, '../db/rifatudo');
-let db = new sqlite3.Database(dbPath);
+const db = new sqlite3.Database(dbPath);
 
 // Table cotas
 // ID INTEGER PRIMARY KEY AUTOINCREMENT
@@ -19,7 +19,7 @@ exports.insertCotas = function (data, callback) {
                 callback(err)
                 return console.log(err.message);
             }
-            callback(this.lastID)
+            callback(this.lastID);
             console.log(`A row has been inserted with rowid ${this.lastID}`);
         }
     );
@@ -39,6 +39,17 @@ exports.selectAllCotas = function (callback) {
 exports.selectIdCotas = function (idCotas, callback) {
     db.serialize(function () {
         db.all(`SELECT * FROM cotas WHERE ID == ${idCotas}`, function (err, allRows) {
+            if (err != null) {
+                console.log(err);
+            }
+            callback(allRows);
+        });
+    });
+}
+
+exports.selectIdRifas = function (idRifas, callback) {
+    db.serialize(function () {
+        db.all(`SELECT * FROM cotas WHERE id_rifa == ${idRifas}`, function (err, allRows) {
             if (err != null) {
                 console.log(err);
             }

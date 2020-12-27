@@ -3,9 +3,9 @@ const CotasController = require('../controllers/CotasController');
 
 cotasRoute = Router();
 
-// USUARIOS
+// COTAS
 cotasRoute.get('/cotas', (req, res) => {
-    function callback(row) { 
+    function callback(row) {
         res.json(row);
     }
     CotasController.selectAllCotas(callback);
@@ -19,8 +19,15 @@ cotasRoute.get('/cotas/:id', (req, res) => {
     CotasController.selectIdCotas(id, callback);
 });
 
+cotasRoute.get('/rifas/:id/cotas', (req, res) => {
+    const { id } = req.params;
+    function callback(row) {
+        res.json(row);
+    }
+    CotasController.selectIdRifas(id, callback);
+});
+
 cotasRoute.post('/cotas', (req, res) => {
-    console.log(req);
     const { data } = req.body;
     function callback(row) {
         console.log(row);
