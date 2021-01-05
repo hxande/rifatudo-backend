@@ -45,4 +45,12 @@ cotasRoute.delete('/cotas/:id', (req, res) => {
     res.sendStatus(200);
 });
 
+cotasRoute.get('/rifas/:id/cotas/detalhe', (req, res) => {
+    const { id } = req.params;
+    function callback(row) {
+        res.json(row);
+    }
+    CotasController.selectDescCotas(id, callback);
+});
+
 module.exports = cotasRoute;

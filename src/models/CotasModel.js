@@ -65,3 +65,12 @@ exports.deleteCotas = function (idCotas) {
         }
     });
 }
+
+exports.selectDescCotas = function (idRifas, callback) {
+    db.all(`SELECT count(*) desc FROM cotas WHERE status = 0 AND id_rifa = ${idRifas} UNION SELECT count(*) FROM cotas WHERE status <> 0 AND id_rifa = ${idRifas};`, function (err, allRows) {
+        if (err != null) {
+            console.log(err);
+        }
+        callback(allRows);
+    });
+}

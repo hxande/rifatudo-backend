@@ -16,10 +16,13 @@ exports.insertCotas = function (data) {
     function callback(id_cota) {
         console.log("Insert Cota " + id_cota);
     }
-
     CotasModel.insertCotas(data, callback);
 };
 
 exports.deleteCotas = function (idCotas) {
     CotasModel.deleteCotas(idCotas);
+};
+
+exports.selectDescCotas = function (idRifas, callback) {
+    CotasModel.selectDescCotas(idRifas, callback);
 };
