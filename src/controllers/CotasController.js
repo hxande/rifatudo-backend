@@ -13,8 +13,8 @@ exports.selectIdRifas = function (idRifas, callback) {
 };
 
 exports.insertCotas = function (data) {
-    function callback(id_cota) {
-        console.log("Insert Cota " + id_cota);
+    function callback(idCotas) {
+        console.log("Insert Cota " + idCotas);
     }
     CotasModel.insertCotas(data, callback);
 };

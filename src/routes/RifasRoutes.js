@@ -21,9 +21,10 @@ rifasRoute.get('/rifas/:id', (req, res) => {
 
 rifasRoute.post('/rifas', (req, res) => {
     const { data } = req.body;
-    RifasController.insertRifas(data);
-
-    res.sendStatus(200);
+    function callback(id) {
+        res.json(id);
+    }
+    RifasController.insertRifas(data, callback);
 });
 
 rifasRoute.delete('/rifas/:id', (req, res) => {
