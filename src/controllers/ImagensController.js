@@ -1,4 +1,4 @@
-const ImagensModel = require("../models/ImagensModel");
+const ImagensModel = require('../models/ImagensModel');
 
 exports.selectAllImagens = function (callback) {
     ImagensModel.selectAllImagens(callback);
@@ -14,7 +14,7 @@ exports.selectIdRifas = function (idRifas, callback) {
 
 exports.insertImagens = function (idRifas, num, data) {
     function callback(idImagens) {
-        console.log("Insert Imagem " + idImagens);
+        console.log('Insert Imagem ' + idImagens);
     }
     ImagensModel.insertImagens(idRifas, num, data, callback);
 };

@@ -1,17 +1,16 @@
 const { Router } = require('express');
 const EnderecosController = require('../controllers/UsuariosController');
 
-enderecosRoutes = Router();
+const enderecosRoute = Router();
 
-// ENDERECOS
-enderecosRoutes.get('/ends', (req, res) => {
+enderecosRoute.get('/ends', (req, res) => {
     function callback(row) {
         res.json(row);
     }
     EnderecosController.selectAllEnderecos(callback);
 });
 
-enderecosRoutes.get('/ends/:id', (req, res) => {
+enderecosRoute.get('/ends/:id', (req, res) => {
     const { id } = req.params;
     function callback(row) {
         res.json(row);
@@ -19,23 +18,22 @@ enderecosRoutes.get('/ends/:id', (req, res) => {
     EnderecosController.selectIdEnderecos(id, callback);
 });
 
-enderecosRoutes.post('/ends', (req, res) => {
+enderecosRoute.post('/ends', (req, res) => {
     console.log(req);
     const { data } = req.body;
     function callback(row) {
         console.log(row);
-        // res.json(row);
     }
     EnderecosController.insertEnderecos(data, callback);
 
     res.sendStatus(200);
 });
 
-enderecosRoutes.delete('/ends/:id', (req, res) => {
+enderecosRoute.delete('/ends/:id', (req, res) => {
     const { id } = req.params;
     EnderecosController.deleteEnderecos(id);
 
     res.sendStatus(200);
 });
 
-module.exports = enderecosRoutes;
+module.exports = enderecosRoute;

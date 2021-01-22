@@ -5,13 +5,22 @@
   "repository": "https://github.com/hxande/rifatudo-backend.git",
   "author": "Hugo <c1297097@bb.com.br>",
   "scripts": {
-    "dev": "node src/index.js"
+    "dev": "node src/index.js --env testing"
   },
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "consolidate": "^0.16.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mercadopago": "^1.5.3",
     "multer": "^1.4.2",
-    "sqlite3": "^5.0.0"
+    "sqlite3": "^5.0.0",
+    "util": "^0.12.3",
+    "yargs": "^16.2.0"
   }
 }

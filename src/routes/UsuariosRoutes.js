@@ -1,14 +1,21 @@
 const { Router } = require('express');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const UsuariosController = require('../controllers/UsuariosController');
 
-usuariosRoute = Router();
+const usuariosRoute = Router();
 
-// USUARIOS
 usuariosRoute.get('/users', (req, res) => {
+    const { username } = req.query
     function callback(row) {
         res.json(row);
     }
-    UsuariosController.selectAllUsuarios(callback);
+    if (username) {
+        const resp = UsuariosController.selectUsernameUsuarios(username, callback);
+        console.log(resp);
+    } else {
+        UsuariosController.selectAllUsuarios(callback);
+    }
 });
 
 usuariosRoute.get('/users/:id', (req, res) => {
@@ -20,15 +27,38 @@ usuariosRoute.get('/users/:id', (req, res) => {
 });
 
 usuariosRoute.post('/users', (req, res) => {
-    console.log(req);
-    const { data } = req.body;
-    function callback(row) {
-        console.log(row);
-        // res.json(row);
+    let { data } = req.body;
+    function callback(rows) {
+        console.log(rows);
     }
     UsuariosController.insertUsuarios(data, callback);
 
     res.sendStatus(200);
+});
+
+usuariosRoute.post('/users/auth', (req, res) => {
+    const { username, password } = req.body.data;
+    async function callback(row, password) {
+        if (row.length > 0) {
+            if (await bcrypt.compare(String(password), String(row[0].password))) {
+                let user = {
+                    id: row[0].ID,
+                    email: row[0].email,
+                    name: row[0].nome,
+                    surname: row[0].sobrenome,
+                }
+                res.json({
+                    user,
+                    token: jwt.sign(user, 'PRIVATEKEY'),
+                });
+            } else {
+                res.sendStatus(401);
+            }
+        } else {
+            res.sendStatus(404);
+        }
+    }
+    UsuariosController.validarUsuarioSenha(username, password, callback);
 });
 
 usuariosRoute.delete('/users/:id', (req, res) => {

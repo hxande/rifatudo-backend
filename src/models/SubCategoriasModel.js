@@ -3,12 +3,6 @@ const path = require('path');
 const dbPath = path.resolve(__dirname, '../db/rifatudo');
 let db = new sqlite3.Database(dbPath);
 
-// Table subcategorias
-// ID INTEGER PRIMARY KEY AUTOINCREMENT
-// id_categoria varchar(255)
-// nome varchar(255)
-
-
 exports.insertSubCategorias = function (data, callback) {
     db.run(`INSERT INTO subcategorias (id_categoria, nome) VALUES(?,?)`,
         [data.id_categoria, data.nome],
@@ -32,23 +26,23 @@ exports.selectAllSubCategorias = function (callback) {
             callback(allRows);
         });
     });
-}
+};
 
 exports.selectIdSubCategorias = function (idSubcategorias, callback) {
     db.serialize(function () {
-        db.all(`SELECT * FROM subcategorias WHERE ID == ${idSubcategorias}`, function (err, allRows) {
+        db.all(`SELECT * FROM subcategorias WHERE ID = ${idSubcategorias}`, function (err, allRows) {
             if (err != null) {
                 console.log(err);
             }
             callback(allRows);
         });
     });
-}
+};
 
 exports.deleteSubCategorias = function (idSubcategorias) {
-    db.run(`DELETE FROM subcategorias WHERE ID == ${idSubcategorias}`, function (err) {
+    db.run(`DELETE FROM subcategorias WHERE ID = ${idSubcategorias}`, function (err) {
         if (err != null) {
             console.log(err);
         }
     });
-}
+};

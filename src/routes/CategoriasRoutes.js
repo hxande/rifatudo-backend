@@ -1,9 +1,8 @@
 const { Router } = require('express');
 const CategoriasController = require('../controllers/CategoriasController');
 
-categoriasRoute = Router();
+const categoriasRoute = Router();
 
-// CATEGORIAS
 categoriasRoute.get('/categorias', (req, res) => {
     function callback(row) {
         res.json(row);
@@ -23,7 +22,6 @@ categoriasRoute.post('/categorias', (req, res) => {
     const { data } = req.body;
     function callback(row) {
         console.log(row);
-        // res.json(row);
     }
     CategoriasController.insertCategorias(data, callback);
 

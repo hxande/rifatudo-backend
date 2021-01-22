@@ -1,6 +1,5 @@
-const RifasModel = require("../models/RifasModel");
-const ImagensController = require("../controllers/ImagensController");
-const CotasController = require("../controllers/CotasController");
+const RifasModel = require('../models/RifasModel');
+const CotasController = require('../controllers/CotasController');
 
 exports.selectAllRifas = function (callback) {
     RifasModel.selectAllRifas(callback);

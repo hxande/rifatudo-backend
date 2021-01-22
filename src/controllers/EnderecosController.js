@@ -1,17 +1,17 @@
-const EnderecosModel = require("../models/EnderecosModel");
+const EnderecosModel = require('../models/EnderecosModel');
 
 exports.selectAllEnderecos = function (callback) {
     EnderecosModel.selectAllEnderecos(callback);
 };
 
-exports.selectIdEnderecos = function (idEndereco, callback) {
-    EnderecosModel.selectIdEnderecos(idEndereco, callback);
+exports.selectIdEnderecos = function (idEnderecos, callback) {
+    EnderecosModel.selectIdEnderecos(idEnderecos, callback);
 };
 
 exports.insertEnderecos = function (data, callback) {
     EnderecosModel.insertEnderecos(data, callback);
 };
 
-exports.deleteEnderecos = function (idEndereco) {
-    EnderecosModel.deleteEnderecos(idEndereco);
+exports.deleteEnderecos = function (idEnderecos) {
+    EnderecosModel.deleteEnderecos(idEnderecos);
 };

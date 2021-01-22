@@ -3,14 +3,6 @@ const path = require('path');
 const dbPath = path.resolve(__dirname, '../db/rifatudo');
 const db = new sqlite3.Database(dbPath);
 
-// Table cotas
-// ID INTEGER PRIMARY KEY AUTOINCREMENT
-// id_rifa varchar(255)
-// id_usuario varchar(255)
-// num varchar(255)
-// valor varchar(255)
-// status varchar(255)
-
 exports.insertCotas = function (data, callback) {
     db.run(`INSERT INTO cotas (id_rifa, id_usuario, num, valor, status) VALUES(?,?,?,?,?)`,
         [data.id_rifa, data.id_usuario, data.num, data.valor, data.status],
@@ -34,43 +26,63 @@ exports.selectAllCotas = function (callback) {
             callback(allRows);
         });
     });
-}
+};
 
 exports.selectIdCotas = function (idCotas, callback) {
     db.serialize(function () {
-        db.all(`SELECT * FROM cotas WHERE ID == ${idCotas}`, function (err, allRows) {
+        db.all(`SELECT * FROM cotas WHERE ID = ${idCotas}`, function (err, allRows) {
             if (err != null) {
                 console.log(err);
             }
             callback(allRows);
         });
     });
-}
+};
 
 exports.selectIdRifas = function (idRifas, callback) {
     db.serialize(function () {
-        db.all(`SELECT * FROM cotas WHERE id_rifa == ${idRifas}`, function (err, allRows) {
+        db.all(`SELECT * FROM cotas WHERE id_rifa = ${idRifas}`, function (err, allRows) {
             if (err != null) {
                 console.log(err);
             }
             callback(allRows);
         });
     });
-}
+};
+
+exports.selectIdUsuarios = function (idUsuarios, callback) {
+    db.serialize(function () {
+        db.all(`SELECT * FROM cotas WHERE id_usuario = ${idUsuarios}`, function (err, allRows) {
+            if (err != null) {
+                console.log(err);
+            }
+            callback(allRows);
+        });
+    });
+};
 
 exports.deleteCotas = function (idCotas) {
-    db.run(`DELETE FROM cotas WHERE ID == ${idCotas}`, function (err) {
+    db.run(`DELETE FROM cotas WHERE ID = ${idCotas}`, function (err) {
         if (err != null) {
             console.log(err);
         }
     });
-}
+};
 
-exports.selectDescCotas = function (idRifas, callback) {
-    db.all(`SELECT count(*) desc FROM cotas WHERE status = 0 AND id_rifa = ${idRifas} UNION SELECT count(*) FROM cotas WHERE status <> 0 AND id_rifa = ${idRifas};`, function (err, allRows) {
+exports.selectCountCotasStatus = function (idRifas, status, callback) {
+    db.all(`SELECT count(*) contador FROM cotas WHERE status = ${status} AND id_rifa = ${idRifas};`, function (err, allRows) {
         if (err != null) {
             console.log(err);
         }
         callback(allRows);
     });
-}
+};
+
+exports.payCotas = function (data, callback) {
+    db.run(`UPDATE cotas set id_usuario = ${data.id_usuario}, status = 1 WHERE  id_rifa = ${data.id_rifa} AND num = ${data.num}`, function (err) {
+        if (err != null) {
+            console.log(err);
+        }
+        callback(this.lastID);
+    });
+};

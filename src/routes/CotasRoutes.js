@@ -1,9 +1,26 @@
 const { Router } = require('express');
+const authMiddleware = require('../auth');
 const CotasController = require('../controllers/CotasController');
 
-cotasRoute = Router();
+const cotasRoute = Router();
 
-// COTAS
+cotasRoute.post('/cotas', (req, res) => {
+    const { data } = req.body;
+    function callback(row) {
+        console.log(row);
+    }
+    CotasController.insertCotas(data, callback);
+
+    res.sendStatus(200);
+});
+
+cotasRoute.delete('/cotas/:id', (req, res) => {
+    const { id } = req.params;
+    CotasController.deleteCotas(id);
+
+    res.sendStatus(200);
+});
+
 cotasRoute.get('/cotas', (req, res) => {
     function callback(row) {
         res.json(row);
@@ -19,38 +36,37 @@ cotasRoute.get('/cotas/:id', (req, res) => {
     CotasController.selectIdCotas(id, callback);
 });
 
-cotasRoute.get('/rifas/:id/cotas', (req, res) => {
+cotasRoute.get('/users/:id/cotas', (req, res) => {
     const { id } = req.params;
     function callback(row) {
         res.json(row);
+    }
+    CotasController.selectIdUsuarios(id, callback);
+});
+
+cotasRoute.get('/rifas/:id/cotas', (req, res) => {
+    const { id } = req.params;
+    function callback(rows) {
+        rows.sort((a, b) => (a.num > b.num) ? 1 : ((b.num > a.num) ? -1 : 0));
+        res.json(rows);
     }
     CotasController.selectIdRifas(id, callback);
 });
 
-cotasRoute.post('/cotas', (req, res) => {
+cotasRoute.get('/rifas/:id/cotas/status/:status/contagem', (req, res) => {
+    const { id, status } = req.params;
+    function callback(rows) {
+        res.json(rows);
+    }
+    CotasController.selectCountCotasStatus(id, status, callback);
+});
+
+cotasRoute.post('/users/:user/rifas/:id/cotas/comprar', authMiddleware, (req, res) => {
     const { data } = req.body;
-    function callback(row) {
-        console.log(row);
-        // res.json(row);
-    }
-    CotasController.insertCotas(data, callback);
+    const { user } = req.params;
+    CotasController.payCotas(user, data);
 
     res.sendStatus(200);
-});
-
-cotasRoute.delete('/cotas/:id', (req, res) => {
-    const { id } = req.params;
-    CotasController.deleteCotas(id);
-
-    res.sendStatus(200);
-});
-
-cotasRoute.get('/rifas/:id/cotas/detalhe', (req, res) => {
-    const { id } = req.params;
-    function callback(row) {
-        res.json(row);
-    }
-    CotasController.selectDescCotas(id, callback);
 });
 
 module.exports = cotasRoute;

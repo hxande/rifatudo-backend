@@ -1,9 +1,8 @@
 const { Router } = require('express');
 const RifasController = require('../controllers/RifasController');
 
-rifasRoute = Router();
+const rifasRoute = Router();
 
-// RIFAS
 rifasRoute.get('/rifas', (req, res) => {
     function callback(row) {
         res.json(row);

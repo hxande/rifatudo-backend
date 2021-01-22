@@ -1,10 +1,10 @@
 const multer = require('multer');
 const path = require('path');
 const crypto = require('crypto');
-
 const { Router } = require('express');
 const ImagensController = require('../controllers/ImagensController');
-ImagensRoute = Router();
+
+const imagensRoute = Router();
 
 const config = {
     storage: multer.diskStorage({
@@ -18,7 +18,7 @@ const config = {
 }
 const upload = multer(config);
 
-ImagensRoute.get('/imagens/:id', (req, res) => {
+imagensRoute.get('/imagens/:id', (req, res) => {
     const { id } = req.params;
     function callback(row) {
         res.json(row);
@@ -26,19 +26,18 @@ ImagensRoute.get('/imagens/:id', (req, res) => {
     ImagensController.selectIdImagens(id, callback);
 });
 
-ImagensRoute.get('/rifas/:id/imagens', (req, res) => {
+imagensRoute.get('/rifas/:id/imagens', (req, res) => {
     const { id } = req.params;
     function callback(rows) {
         rows.map(row => {
             row.image_url = `http://192.168.0.10:3333/uploads/${row.conteudo}`
         })
-        console.log('hugo  ', rows);
         res.json(rows);
     }
     ImagensController.selectIdRifas(id, callback);
 });
 
-ImagensRoute.post('/rifas/:id/imagens/:num', upload.single('image'), (req, res) => {
+imagensRoute.post('/rifas/:id/imagens/:num', upload.single('image'), (req, res) => {
     const { id, num } = req.params;
     const data = req.file.filename;
     ImagensController.insertImagens(id, num, data);
@@ -46,11 +45,11 @@ ImagensRoute.post('/rifas/:id/imagens/:num', upload.single('image'), (req, res) 
     res.sendStatus(200);
 });
 
-// ImagensRoute.delete('/Imagens/:id', (req, res) => {
+// imagensRoute.delete('/Imagens/:id', (req, res) => {
 //     const { id } = req.params;
 //     ImagensController.deleteImagens(id);
 
 //     res.sendStatus(200);
 // });
 
-module.exports = ImagensRoute;
+module.exports = imagensRoute;

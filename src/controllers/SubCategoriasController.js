@@ -1,4 +1,4 @@
-const SubCategoriasModel = require("../models/SubCategoriasModel");
+const SubCategoriasModel = require('../models/SubCategoriasModel');
 
 exports.selectAllSubCategorias = function (callback) {
     SubCategoriasModel.selectAllSubCategorias(callback);
