@@ -11,7 +11,7 @@ exports.insertUsuarios = function (data, callback) {
                 callback(err)
                 return console.log(err.message);
             }
-            callback(this.lastID)
+            callback(this.lastID);
             console.log(`A row has been inserted with rowid ${this.lastID}`);
         }
     );
@@ -50,7 +50,7 @@ exports.selectUsernameUsuarios = function (username, callback) {
     });
 };
 
-exports.validarUsuarioSenha = function (username, password, callback) {
+exports.validateUserPass = async function (username, password, callback) {
     db.serialize(function () {
         db.all(`SELECT * FROM usuarios WHERE username = '${username}'`, function (err, row) {
             if (err != null) {
