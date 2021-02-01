@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const engines = require('consolidate');
 const path = require('path');
+const cron = require('cron').CronJob;
 
 const http = require('http');
 const enderecosRoutes = require('./routes/EnderecosRoutes');
@@ -16,6 +17,11 @@ const pagamentosRoutes = require('./routes/PagamentosRoutes');
 
 require('./config/getEnv')();
 
+const job = new cron('0 2 15 * * *', function () {
+    console.log('You will see this message every second');
+}, null, true, 'America/Sao_Paulo');
+job.start();
+
 const app = express();
 const server = http.Server(app);
 
@@ -24,9 +30,9 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.engine("ejs", engines.ejs);
+app.engine('ejs', engines.ejs);
 app.set('views', path.join(__dirname, './views'));
-app.set("view engine", "ejs");
+app.set('view engine', 'ejs');
 
 app.use(enderecosRoutes);
 app.use(usuariosRoutes);
