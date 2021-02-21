@@ -14,12 +14,12 @@ let db = new sqlite3.Database('./src/db/rifatudo');
 // db.run(TABELA_CATEGORIAS);
 
 // const TABELA_PRODUTOS =
-//   'CREATE TABLE produtos (ID INTEGER PRIMARY KEY AUTOINCREMENT, id_usuario varchar(255), nome varchar(255), descricao varchar(255), id_categoria varchar(255), id_subcategoria varchar(255), uf varchar(255), cidade varchar(255), status varchar(255))'
+//   'CREATE TABLE produtos (ID INTEGER PRIMARY KEY AUTOINCREMENT, id_usuario varchar(255), nome varchar(255), descricao varchar(255), id_categoria varchar(255), id_subcategoria varchar(255), uf varchar(255), cidade varchar(255), status varchar(255)), Timestamp DATETIME DEFAULT CURRENT_TIMESTAMP'
 // db.run(TABELA_PRODUTOS);
 
-// const TABELA_RIFAS =
-//   'CREATE TABLE rifas (ID INTEGER PRIMARY KEY AUTOINCREMENT, id_usuario varchar(255), titulo varchar(255), descricao varchar(255), id_categoria varchar(255), uf varchar(255), cidade varchar(255), status varchar(255), valor varchar(255), qtd_cotas varchar(255), qtd_cotas_g varchar(255), qtd_cotas_m varchar(255), qtd_ganhadores varchar(255), duracao varchar(255))'
-// db.run(TABELA_RIFAS);
+const TABELA_RIFAS =
+  'CREATE TABLE rifas (ID INTEGER PRIMARY KEY AUTOINCREMENT, id_usuario varchar(255), titulo varchar(255), descricao varchar(255), id_categoria varchar(255), uf varchar(255), cidade varchar(255), status varchar(255), valor varchar(255), qtd_cotas varchar(255), qtd_cotas_g varchar(255), qtd_cotas_m varchar(255), qtd_ganhadores varchar(255), duracao varchar(255), sqltime TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)'
+db.run(TABELA_RIFAS);
 
 // const TABELA_SUB_CATEGORIAS =
 //   'CREATE TABLE subcategorias (ID INTEGER PRIMARY KEY AUTOINCREMENT,id_categoria varchar(255), nome varchar(255))'
