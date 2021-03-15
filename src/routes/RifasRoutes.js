@@ -18,6 +18,14 @@ rifasRoute.get('/rifas/:id', (req, res) => {
     RifasController.selectIdRifas(id, callback);
 });
 
+rifasRoute.get('/rifas/:id/my', (req, res) => {
+    const { id } = req.params;
+    function callback(row) {
+        res.json(row);
+    }
+    RifasController.selectMyRifas(id, callback);
+});
+
 rifasRoute.post('/rifas', (req, res) => {
     const { data } = req.body;
     function callback(id) {

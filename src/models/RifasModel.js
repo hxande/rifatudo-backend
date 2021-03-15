@@ -39,6 +39,17 @@ exports.selectIdRifas = function (idRifas, callback) {
     });
 };
 
+exports.selectMyRifas = function (idUsuarios, callback) {
+    db.serialize(function () {
+        db.all(`SELECT a.ID, a.titulo, a.status, a.duracao, SUM(b.valor) soma, COUNT(b.status) contagem FROM rifas a INNER JOIN cotas b ON a.ID = b.id_rifa WHERE b.status = 1 AND a.id_usuario = ${idUsuarios}`, function (err, allRows) {
+            if (err != null) {
+                console.log(err);
+            }
+            callback(allRows);
+        });
+    });
+};
+
 exports.deleteRifas = function (idRifas) {
     db.run(`DELETE FROM rifas WHERE ID = ${idRifas}`, function (err) {
         if (err != null) {

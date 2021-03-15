@@ -9,6 +9,10 @@ exports.selectIdRifas = function (idRifas, callback) {
     RifasModel.selectIdRifas(idRifas, callback);
 };
 
+exports.selectMyRifas = function (idUsuarios, callback) {
+    RifasModel.selectMyRifas(idUsuarios, callback);
+};
+
 exports.insertRifas = function (data, callbackParent) {
     const { qtd_cotas, qtd_cotas_g, valor, imagem1, imagem2, imagem3 } = data;
     const valor_cota = valor / (qtd_cotas - qtd_cotas_g);
