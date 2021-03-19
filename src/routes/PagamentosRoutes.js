@@ -1,4 +1,5 @@
 const express = require('express');
+const authMiddleware = require('../auth');
 const PagamentosController = require('../controllers/PagamentosController');
 
 const pagamentosRoute = express.Router();
@@ -15,6 +16,16 @@ pagamentosRoute.get('/pending', (req, res) => {
 
 pagamentosRoute.get('/failure', (req, res) => {
     return res.render('falhaScreen')
+});
+
+pagamentosRoute.post('/pay', authMiddleware, (req, res) => {
+    try {
+        PagamentosController.pay(req.body);
+    } catch (error) {
+        console.log(error);
+    }
+
+    res.sendStatus(200);
 });
 
 module.exports = pagamentosRoute;

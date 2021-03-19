@@ -1,4 +1,5 @@
 const MercadoPago = require('mercadopago');
+const PaymentsModel = require('../models/PaymentsModel');
 
 const getFullUrl = (req) => {
     const url = req.protocol + '://' + req.get('host');
@@ -49,4 +50,11 @@ module.exports = {
             return res.send(err.message);
         }
     }
+};
+
+module.exports.pay = function (data) {
+    function callback(idPayment) {
+        console.log('Payment ' + idPayment);
+    }
+    PaymentsModel.insertPayments(data, callback);
 };
