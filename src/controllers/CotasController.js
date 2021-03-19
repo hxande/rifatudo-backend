@@ -42,3 +42,15 @@ exports.payCotas = function (idUsuarios, data) {
         CotasModel.pagarCotas(element, callback);
     }
 };
+
+exports.pendingQuotas = function (idRaffle, data) {
+    function callback(idQuota) {
+        console.log('Pending Quota ' + idQuota);
+    }
+
+    const arrayQuotas = data.quotas.split(',');
+
+    for (let index = 0; index < arrayQuotas.length; index++) {
+        CotasModel.pendingQuotas(data.user, idRaffle, arrayQuotas[index], callback);
+    }
+};

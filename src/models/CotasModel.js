@@ -86,3 +86,12 @@ exports.payCotas = function (data, callback) {
         callback(this.lastID);
     });
 };
+
+exports.pendingQuotas = function (user, raffle, number, callback) {
+    db.run(`UPDATE cotas set id_usuario = ${user}, status = 1 WHERE  id_rifa = ${raffle} AND num = ${number}`, function (err) {
+        if (err != null) {
+            console.log(err);
+        }
+        callback(this.lastID);
+    });
+};
