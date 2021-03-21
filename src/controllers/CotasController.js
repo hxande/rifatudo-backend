@@ -43,14 +43,14 @@ exports.payCotas = function (idUsuarios, data) {
     }
 };
 
-exports.pendingQuotas = function (idRaffle, data) {
+exports.updateStatusQuotas = function (idRaffle, status, data) {
     function callback(idQuota) {
-        console.log('Pending Quota ' + idQuota);
+        console.log('Update Status Quota ' + idQuota);
     }
 
     const arrayQuotas = data.quotas.split(',');
 
     for (let index = 0; index < arrayQuotas.length; index++) {
-        CotasModel.pendingQuotas(data.user, idRaffle, arrayQuotas[index], callback);
+        CotasModel.updateStatusQuotas(data.user, idRaffle, status, arrayQuotas[index], callback);
     }
 };
