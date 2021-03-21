@@ -45,6 +45,14 @@ imagensRoute.post('/rifas/:id/imagens/:num', upload.single('image'), (req, res) 
     res.sendStatus(200);
 });
 
+imagensRoute.post('/raffles/:raffle/quotas/:quotas/receipt', upload.single('image'), (req, res) => {
+    const { raffle, quotas } = req.params;
+    const data = raffle + '-' + quotas + '-' + req.file.filename;
+    ImagensController.insertImagens(raffle, 0, data);
+
+    res.sendStatus(200);
+});
+
 // imagensRoute.delete('/Imagens/:id', (req, res) => {
 //     const { id } = req.params;
 //     ImagensController.deleteImagens(id);
