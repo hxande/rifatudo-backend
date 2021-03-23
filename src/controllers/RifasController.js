@@ -5,6 +5,10 @@ exports.selectAllRifas = function (callback) {
     RifasModel.selectAllRifas(callback);
 };
 
+exports.selectRafflesByPage = function (page, callback) {
+    RifasModel.selectRafflesByPage(page, callback);
+};
+
 exports.selectIdRifas = function (idRifas, callback) {
     RifasModel.selectIdRifas(idRifas, callback);
 };
