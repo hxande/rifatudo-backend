@@ -87,6 +87,17 @@ exports.payCotas = function (data, callback) {
     });
 };
 
+exports.selectQuotasByRaffleAndNumbers = function (raffle, quotas, callback) {
+    db.serialize(function () {
+        db.all(`SELECT * FROM cotas WHERE id_rifa = ${raffle} AND num IN (${quotas})`, function (err, allRows) {
+            if (err != null) {
+                console.log(err);
+            }
+            callback(allRows);
+        });
+    });
+};
+
 exports.updateStatusQuotas = function (user, raffle, status, number, callback) {
     db.run(`UPDATE cotas set id_usuario = ${user}, status = ${status} WHERE  id_rifa = ${raffle} AND num = ${number}`, function (err) {
         if (err != null) {

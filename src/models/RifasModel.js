@@ -30,7 +30,6 @@ exports.selectAllRifas = function (callback) {
 
 exports.selectRafflesByPage = function (page, callback) {
     const newRange = (page - 1) * 5;
-    console.log(newRange);
     db.serialize(function () {
         db.all(`SELECT * FROM rifas LIMIT ${newRange}, 5`, function (err, allRows) {
             if (err != null) {

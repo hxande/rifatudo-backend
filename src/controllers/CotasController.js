@@ -43,14 +43,33 @@ exports.payCotas = function (idUsuarios, data) {
     }
 };
 
-exports.updateStatusQuotas = function (idRaffle, status, data) {
-    function callback(idQuota) {
-        console.log('Update Status Quota ' + idQuota);
+exports.updateStatusQuotas = async function (idRaffle, status, data, res) {
+    function callbackParent(quotas) {
+        let canBuy = true;
+        for (let index = 0; index < quotas.length; index++) {
+            const element = quotas[index];
+            if (element.status !== '0') {
+                canBuy = false;
+                break;
+            }
+        }
+
+        if (canBuy) {
+            function callback(idQuota) {
+                console.log('Update Status Quota ' + idQuota);
+            }
+
+            const arrayQuotas = data.quotas.split(',');
+
+            for (let index = 0; index < arrayQuotas.length; index++) {
+                CotasModel.updateStatusQuotas(data.user, idRaffle, status, arrayQuotas[index], callback);
+            }
+
+            res.sendStatus(200);
+        } else {
+            res.sendStatus(400);
+        }
     }
 
-    const arrayQuotas = data.quotas.split(',');
-
-    for (let index = 0; index < arrayQuotas.length; index++) {
-        CotasModel.updateStatusQuotas(data.user, idRaffle, status, arrayQuotas[index], callback);
-    }
+    CotasModel.selectQuotasByRaffleAndNumbers(idRaffle, data.quotas, callbackParent);
 };

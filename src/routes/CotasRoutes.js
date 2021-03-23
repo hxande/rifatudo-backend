@@ -72,12 +72,10 @@ cotasRoute.post('/users/:user/rifas/:id/cotas/comprar', authMiddleware, (req, re
 cotasRoute.put('/raffles/:raffle/quotas/status/:status', authMiddleware, (req, res) => {
     const { raffle, status } = req.params;
     try {
-        CotasController.updateStatusQuotas(raffle, status, req.body);
+        CotasController.updateStatusQuotas(raffle, status, req.body, res);
     } catch (error) {
         console.log(error);
     }
-
-    res.sendStatus(200);
 });
 
 module.exports = cotasRoute;
