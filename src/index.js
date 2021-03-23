@@ -14,6 +14,7 @@ const rifasRoutes = require('./routes/RifasRoutes');
 const cotasRoutes = require('./routes/CotasRoutes');
 const imagensRoutes = require('./routes/ImagensRoutes');
 const pagamentosRoutes = require('./routes/PagamentosRoutes');
+const statementsRoutes = require('./routes/StatementsRoutes');
 
 require('./config/getEnv')();
 
@@ -41,6 +42,7 @@ app.use(subcategoriasRoutes);
 app.use(rifasRoutes);
 app.use(cotasRoutes);
 app.use(imagensRoutes);
+app.use(statementsRoutes);
 app.use('/payments', pagamentosRoutes);
 app.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));
 
