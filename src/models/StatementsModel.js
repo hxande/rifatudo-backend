@@ -5,7 +5,7 @@ const db = new sqlite3.Database(dbPath);
 
 exports.insertStatements = function (data, type, callback) {
     db.run(`INSERT INTO movimentacoes (id_usuario, tipo_transacao, valor) VALUES(?,?,?)`,
-        [data.user, type, data.valor],
+        [data.owner, type, data.valor],
         function (err) {
             if (err) {
                 callback(err)
