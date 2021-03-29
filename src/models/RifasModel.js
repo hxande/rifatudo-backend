@@ -31,7 +31,7 @@ exports.selectAllRifas = function (callback) {
 exports.selectRafflesByPage = function (page, callback) {
     const newRange = (page - 1) * 5;
     db.serialize(function () {
-        db.all(`SELECT * FROM rifas LIMIT ${newRange}, 5`, function (err, allRows) {
+        db.all(`SELECT * FROM rifas WHERE status > 0 LIMIT ${newRange}, 5`, function (err, allRows) {
             if (err != null) {
                 console.log(err);
             }
@@ -64,6 +64,25 @@ exports.selectMyRifas = function (idUsuarios, callback) {
 
 exports.deleteRifas = function (idRifas) {
     db.run(`DELETE FROM rifas WHERE ID = ${idRifas}`, function (err) {
+        if (err != null) {
+            console.log(err);
+        }
+    });
+};
+
+exports.selectRafflesQttMin = function (raffle, callback) {
+    db.serialize(function () {
+        db.get(`SELECT qtd_cotas_m FROM rifas WHERE ID = ${raffle}`, function (err, row) {
+            if (err != null) {
+                console.log(err);
+            }
+            callback(row);
+        });
+    });
+};
+
+exports.updateRafflesStatus = function (raffle, status) {
+    db.run(`UPDATE rifas SET status = ${status} WHERE ID = ${raffle}`, function (err) {
         if (err != null) {
             console.log(err);
         }

@@ -1,4 +1,5 @@
 const RifasModel = require('../models/RifasModel');
+const CotasModel = require('../models/CotasModel');
 const CotasController = require('../controllers/CotasController');
 
 exports.selectAllRifas = function (callback) {
@@ -41,4 +42,17 @@ exports.insertRifas = function (data, callbackParent) {
 
 exports.deleteRifas = function (idRifas) {
     RifasModel.deleteRifas(idRifas);
+};
+
+exports.checkStatus = function (raffle) {
+    function callbackParent(qttMin) {
+        function callback(count) {
+            if (count.total >= +qttMin.qtd_cotas_m) {
+                RifasModel.updateRafflesStatus(raffle, 1);
+            }
+        }
+        CotasModel.selectCountQuotasSold(raffle, callback);
+    }
+
+    RifasModel.selectRafflesQttMin(raffle, callbackParent);
 };
