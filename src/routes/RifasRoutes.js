@@ -49,7 +49,7 @@ rifasRoute.delete('/rifas/:id', (req, res) => {
     res.sendStatus(200);
 });
 
-rifasRoute.get('/raffles/:raffle/status/check', (req, res) => {
+rifasRoute.put('/raffles/:raffle/status/check', (req, res) => {
     const { raffle } = req.params;
     RifasController.checkStatus(raffle);
     res.sendStatus(200);
