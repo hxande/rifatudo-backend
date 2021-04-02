@@ -18,7 +18,7 @@ let db = new sqlite3.Database('./src/db/rifatudo');
 // db.run(TABELA_PRODUTOS);
 
 // const TABELA_RIFAS =
-//   'CREATE TABLE rifas (ID INTEGER PRIMARY KEY AUTOINCREMENT, id_usuario varchar(255), titulo varchar(255), descricao varchar(255), id_categoria varchar(255), uf varchar(255), cidade varchar(255), status varchar(255), valor varchar(255), qtd_cotas varchar(255), qtd_cotas_g varchar(255), qtd_cotas_m varchar(255), qtd_ganhadores varchar(255), duracao varchar(255), sqltime TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)'
+//   'CREATE TABLE rifas (ID INTEGER PRIMARY KEY AUTOINCREMENT, id_usuario varchar(255), titulo varchar(255), descricao varchar(255), id_categoria varchar(255), uf varchar(255), cidade varchar(255), status varchar(255), valor varchar(255), qtd_cotas varchar(255), qtd_cotas_g varchar(255), qtd_cotas_m varchar(255), qtd_ganhadores varchar(255), duracao varchar(255), sqltime TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL, update_sqltime TIMESTAMP)'
 // db.run(TABELA_RIFAS);
 
 // const TABELA_SUB_CATEGORIAS =
@@ -33,8 +33,16 @@ let db = new sqlite3.Database('./src/db/rifatudo');
 //   'CREATE TABLE pagamentos (ID INTEGER PRIMARY KEY AUTOINCREMENT, id_usuario varchar(255), id_rifa varchar(255), cotas varchar(255), metodo_pagamento varchar(255), valor varchar(255), sqltime TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)'
 // db.run(TABELA_PAGAMENTOS);
 
-const TABELA_MOVIMENTACOES =
-  'CREATE TABLE movimentacoes (ID INTEGER PRIMARY KEY AUTOINCREMENT, id_usuario varchar(255), tipo_transacao varchar(255), valor varchar(255), sqltime TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)'
-db.run(TABELA_MOVIMENTACOES);
+// const TABELA_MOVIMENTACOES =
+//   'CREATE TABLE movimentacoes (ID INTEGER PRIMARY KEY AUTOINCREMENT, id_usuario varchar(255), tipo_transacao varchar(255), valor varchar(255), sqltime TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)'
+// db.run(TABELA_MOVIMENTACOES);
+
+// const TABELA_TIPO_STATUS_RIFAS =
+//   'CREATE TABLE tipo_status_rifas (ID INTEGER PRIMARY KEY AUTOINCREMENT, codigo varchar(255), nome varchar(255))'
+// db.run(TABELA_TIPO_STATUS_RIFAS);
+
+// const TABELA_TIPO_STATUS_COTAS =
+//   'CREATE TABLE tipo_status_cotas (ID INTEGER PRIMARY KEY AUTOINCREMENT, codigo varchar(255), nome varchar(255))'
+// db.run(TABELA_TIPO_STATUS_COTAS);
 
 db.close();

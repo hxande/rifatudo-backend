@@ -82,7 +82,7 @@ exports.selectRafflesQttMin = function (raffle, callback) {
 };
 
 exports.updateRafflesStatus = function (raffle, status) {
-    db.run(`UPDATE rifas SET status = ${status} WHERE ID = ${raffle}`, function (err) {
+    db.run(`UPDATE rifas SET status = ${status}, update_sqltime = datetime('now') WHERE ID = ${raffle}`, function (err) {
         if (err != null) {
             console.log(err);
         }

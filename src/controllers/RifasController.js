@@ -48,7 +48,7 @@ exports.checkStatus = function (raffle) {
     function callbackParent(qttMin) {
         function callback(count) {
             if (count.total >= +qttMin.qtd_cotas_m) {
-                RifasModel.updateRafflesStatus(raffle, 1);
+                RifasModel.updateRafflesStatus(raffle, 2);
             }
         }
         CotasModel.selectCountQuotasSold(raffle, callback);
