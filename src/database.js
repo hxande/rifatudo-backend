@@ -45,4 +45,12 @@ let db = new sqlite3.Database('./src/db/rifatudo');
 //   'CREATE TABLE tipo_status_cotas (ID INTEGER PRIMARY KEY AUTOINCREMENT, codigo varchar(255), nome varchar(255))'
 // db.run(TABELA_TIPO_STATUS_COTAS);
 
+// const TABELA_RESULTADOS_SORTEIO =
+//     'CREATE TABLE resultados_sorteio (ID INTEGER PRIMARY KEY AUTOINCREMENT, data varchar(255), sorteio1 varchar(255), sorteio2 varchar(255), sorteio3 varchar(255), sorteio4 varchar(255), sorteio5 varchar(255), sorteio6 varchar(255), sqltime TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)'
+// db.run(TABELA_RESULTADOS_SORTEIO);
+
+// const TABELA_DISPUTAS =
+//     'CREATE TABLE disputas (ID INTEGER PRIMARY KEY AUTOINCREMENT, id_comprador varchar(255), id_vendedor varchar(255), id_rifa varchar(255), id_cota varchar(255), status varchar(255), sqltime TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)'
+// db.run(TABELA_DISPUTAS);
+
 db.close();
