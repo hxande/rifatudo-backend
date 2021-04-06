@@ -73,3 +73,11 @@ exports.updateStatusQuotas = async function (idRaffle, status, data, res) {
 
     CotasModel.selectQuotasByRaffleAndNumbers(idRaffle, data.quotas, callbackParent);
 };
+
+exports.updateStatus = function (raffle, status, number, res) {
+    function callback(quota) {
+        console.log('Update Status Quota ' + quota);
+        res.sendStatus(200);
+    }
+    CotasModel.updateStatus(raffle, status, number, callback);
+};

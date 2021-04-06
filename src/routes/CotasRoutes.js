@@ -78,4 +78,14 @@ cotasRoute.put('/raffles/:raffle/quotas/status/:status', authMiddleware, (req, r
     }
 });
 
+cotasRoute.put('/raffles/:raffle/quotas/:quota/status/:status', authMiddleware, (req, res) => {
+    const { raffle, quota, status } = req.params;
+    try {
+        CotasController.updateStatus(raffle, status, quota, res);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
 module.exports = cotasRoute;

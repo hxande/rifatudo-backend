@@ -117,3 +117,12 @@ exports.updateStatusQuotas = function (user, raffle, status, number, callback) {
         callback(this.lastID);
     });
 };
+
+exports.updateStatus = function (raffle, status, number, callback) {
+    db.run(`UPDATE cotas set status = ${status} WHERE  id_rifa = ${raffle} AND num = ${number}`, function (err) {
+        if (err != null) {
+            console.log(err);
+        }
+        callback(this.lastID);
+    });
+};
