@@ -50,4 +50,4 @@ app.use(disputesRoutes);
 app.use('/payments', pagamentosRoutes);
 app.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));
 
-server.listen(process.env.API_PORT || 3333);
+server.listen(process.env.PORT || 3333);
