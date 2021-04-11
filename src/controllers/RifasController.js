@@ -1,6 +1,40 @@
+const db = require('../db.js');
 const RifasModel = require('../models/RifasModel');
 const CotasModel = require('../models/CotasModel');
 const CotasController = require('../controllers/CotasController');
+
+exports.insertRaffle = async function (data) {
+    const sql = 'INSERT INTO tb_raffles (id_user, title, description, status, value, id_category, uf, city, qtt, qtt_free, qtt_min, qtt_winners, duration) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *';
+    const values = [data.id_user, data.title, data.description, data.status, data.value, data.id_category, data.uf, data.city, data.qtt, data.qtt_free, data.qtt_min, data.qtt_winners, data.duration];
+
+    const client = await db.connect();
+    const response = await client.query(sql, values);
+    client.release();
+
+    const raffleId = response.rows[0].id;
+    const quotaValue = data.value / (data.qtt - data.qtt_free);
+
+    for (let index = 0; index < data.qtt; index++) {
+        const cota = {};
+        cota.id_raffle = raffleId;
+        cota.id_user = 0;
+        cota.num = index;
+        cota.status = 0;
+        cota.value = index < data.qtt_free ? 0 : quotaValue;
+        CotasController.insertQuota(cota);
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
 
 exports.selectAllRifas = function (callback) {
     RifasModel.selectAllRifas(callback);
@@ -16,28 +50,6 @@ exports.selectIdRifas = function (idRifas, callback) {
 
 exports.selectMyRifas = function (idUsuarios, callback) {
     RifasModel.selectMyRifas(idUsuarios, callback);
-};
-
-exports.insertRifas = function (data, callbackParent) {
-    const { qtd_cotas, qtd_cotas_g, valor, imagem1, imagem2, imagem3 } = data;
-    const valor_cota = valor / (qtd_cotas - qtd_cotas_g);
-
-    function callback(idRifas, callbackParent) {
-
-        for (let index = 0; index < qtd_cotas; index++) {
-            let cota = {};
-            cota.id_rifa = idRifas;
-            cota.id_usuario = 0;
-            cota.num = index;
-            cota.status = 0;
-            cota.valor = index < qtd_cotas_g ? 0 : valor_cota;
-            CotasController.insertCotas(cota);
-        }
-
-        callbackParent(idRifas);
-    }
-
-    RifasModel.insertRifas(data, callback, callbackParent);
 };
 
 exports.deleteRifas = function (idRifas) {

@@ -4,10 +4,12 @@ const bodyParser = require('body-parser');
 const engines = require('consolidate');
 const path = require('path');
 const cron = require('cron').CronJob;
-
 const http = require('http');
+
+const usersRoute = require('./routes/UsersRoutes');
+const rafflesRoute = require('./routes/RafflesRoutes');
+
 const enderecosRoutes = require('./routes/EnderecosRoutes');
-const usuariosRoutes = require('./routes/UsuariosRoutes');
 const subcategoriasRoutes = require('./routes/SubCategoriasRoutes');
 const categoriasRoutes = require('./routes/CategoriasRoutes');
 const rifasRoutes = require('./routes/RifasRoutes');
@@ -37,8 +39,10 @@ app.engine('ejs', engines.ejs);
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'ejs');
 
+app.use(usersRoute);
+app.use(rafflesRoute);
+
 app.use(enderecosRoutes);
-app.use(usuariosRoutes);
 app.use(categoriasRoutes);
 app.use(subcategoriasRoutes);
 app.use(rifasRoutes);
