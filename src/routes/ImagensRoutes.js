@@ -1,7 +1,8 @@
+const { Router } = require('express');
 const multer = require('multer');
 const path = require('path');
 const crypto = require('crypto');
-const { Router } = require('express');
+const db = require('../db.js');
 const ImagensController = require('../controllers/ImagensController');
 
 const imagensRoute = Router();
@@ -17,6 +18,27 @@ const config = {
     }),
 }
 const upload = multer(config);
+
+imagensRoute.post('/raffles/:id/images/:num', upload.single('image'), async (req, res) => {
+    const { id, num } = req.params;
+    const data = req.file.filename;
+
+    const sql = 'INSERT INTO tb_images (id_raffle, num, file) VALUES($1, $2, $3)';
+    const values = [id, num, data];
+
+    try {
+        const client = await db.connect();
+        const response = await client.query(sql, values);
+        client.release();
+        res.sendStatus(200);
+    } catch (error) {
+        console.log('Erro [POST] [IMAGE]', error);
+    }
+});
+
+
+
+
 
 imagensRoute.get('/imagens/:id', (req, res) => {
     const { id } = req.params;
@@ -52,12 +74,5 @@ imagensRoute.post('/raffles/:raffle/quotas/:quotas/receipt', upload.single('imag
 
     res.sendStatus(200);
 });
-
-// imagensRoute.delete('/Imagens/:id', (req, res) => {
-//     const { id } = req.params;
-//     ImagensController.deleteImagens(id);
-
-//     res.sendStatus(200);
-// });
 
 module.exports = imagensRoute;

@@ -57,12 +57,12 @@ rafflesRoute.get('/rafflesP/pages/:page', async (req, res) => {
     }
 });
 
-rafflesRoute.post('/rafflesP', async (req, res) => {
+rafflesRoute.post('/raffles', async (req, res) => {
     const data = req.body;
 
     try {
-        await RifasController.insertRaffle(data);
-        res.sendStatus(200);
+        const response = await RifasController.insertRaffle(data);
+        res.json(response);
     } catch (error) {
         console.log('Erro [POST] [RAFFLES]', error);
     }

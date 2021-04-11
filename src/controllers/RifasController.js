@@ -23,6 +23,8 @@ exports.insertRaffle = async function (data) {
         cota.value = index < data.qtt_free ? 0 : quotaValue;
         CotasController.insertQuota(cota);
     }
+
+    return response;
 };
 
 

@@ -39,13 +39,13 @@ exports.connect = async function connect() {
 // CREATE TABLE tb_raffles (
 //     id SERIAL PRIMARY KEY,
 //     id_user INTEGER NOT null,
-//     title VARCHAR(100) NOT null,
+//     title VARCHAR(255) NOT null,
 //     description VARCHAR(255) NOT null,
 //     status INTEGER NOT null,
 //     value DECIMAL NOT null,
 //     id_category INTEGER NOT null,
-//     uf VARCHAR(2) NOT null,
-//     city VARCHAR(50) NOT null,
+//     uf VARCHAR(255) NOT null,
+//     city VARCHAR(255) NOT null,
 //     qtt INTEGER NOT null,
 //     qtt_free INTEGER NOT null,
 //     qtt_min INTEGER NOT null,
@@ -69,4 +69,11 @@ exports.connect = async function connect() {
 // CREATE TABLE tb_categories(
 //     id SERIAL PRIMARY KEY,
 //     name VARCHAR(255) NOT NULL
+// );
+
+// CREATE TABLE tb_images(
+//     id SERIAL PRIMARY KEY,
+//     id_raffle INTEGER NOT null,
+//     num INTEGER NOT null,
+//     file VARCHAR(255) NOT NULL
 // );
