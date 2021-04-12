@@ -68,7 +68,7 @@ exports.connect = async function connect() {
 
 // CREATE TABLE tb_categories(
 //     id SERIAL PRIMARY KEY,
-//     name VARCHAR(255) NOT NULL
+//     description VARCHAR(255) NOT NULL
 // );
 
 // CREATE TABLE tb_images(
