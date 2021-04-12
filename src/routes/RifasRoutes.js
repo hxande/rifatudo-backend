@@ -10,21 +10,21 @@ rifasRoute.get('/rifas', (req, res) => {
     RifasController.selectAllRifas(callback);
 });
 
-rifasRoute.get('/raffles/pages/:page', (req, res) => {
-    const { page } = req.params;
-    function callback(row) {
-        res.json(row);
-    }
-    RifasController.selectRafflesByPage(page, callback);
-});
+// rifasRoute.get('/raffles/pages/:page', (req, res) => {
+//     const { page } = req.params;
+//     function callback(row) {
+//         res.json(row);
+//     }
+//     RifasController.selectRafflesByPage(page, callback);
+// });
 
-rifasRoute.get('/rifas/:id', (req, res) => {
-    const { id } = req.params;
-    function callback(row) {
-        res.json(row);
-    }
-    RifasController.selectIdRifas(id, callback);
-});
+// rifasRoute.get('/rifas/:id', (req, res) => {
+//     const { id } = req.params;
+//     function callback(row) {
+//         res.json(row);
+//     }
+//     RifasController.selectIdRifas(id, callback);
+// });
 
 rifasRoute.get('/rifas/:id/my', (req, res) => {
     const { id } = req.params;

@@ -19,6 +19,22 @@ const config = {
 }
 const upload = multer(config);
 
+imagensRoute.get('/raffles/:id/images', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const client = await db.connect();
+        const response = await client.query(`SELECT * FROM tb_images WHERE id_raffle = ${id}`);
+        client.release();
+        response.rows.map(row => {
+            row.file = `http://192.168.0.10:3333/uploads/${row.file}`
+        })
+        res.json(response.rows);
+    } catch (error) {
+        console.log('Erro [GET] [IMAGES]', error);
+    }
+});
+
 imagensRoute.post('/raffles/:id/images/:num', upload.single('image'), async (req, res) => {
     const { id, num } = req.params;
     const data = req.file.filename;
@@ -40,6 +56,10 @@ imagensRoute.post('/raffles/:id/images/:num', upload.single('image'), async (req
 
 
 
+
+
+
+
 imagensRoute.get('/imagens/:id', (req, res) => {
     const { id } = req.params;
     function callback(row) {
@@ -48,16 +68,16 @@ imagensRoute.get('/imagens/:id', (req, res) => {
     ImagensController.selectIdImagens(id, callback);
 });
 
-imagensRoute.get('/rifas/:id/imagens', (req, res) => {
-    const { id } = req.params;
-    function callback(rows) {
-        rows.map(row => {
-            row.image_url = `http://192.168.0.10:3333/uploads/${row.conteudo}`
-        })
-        res.json(rows);
-    }
-    ImagensController.selectIdRifas(id, callback);
-});
+// imagensRoute.get('/rifas/:id/imagens', (req, res) => {
+//     const { id } = req.params;
+//     function callback(rows) {
+//         rows.map(row => {
+//             row.image_url = `http://192.168.0.10:3333/uploads/${row.conteudo}`
+//         })
+//         res.json(rows);
+//     }
+//     ImagensController.selectIdRifas(id, callback);
+// });
 
 imagensRoute.post('/rifas/:id/imagens/:num', upload.single('image'), (req, res) => {
     const { id, num } = req.params;
