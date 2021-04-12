@@ -8,10 +8,9 @@ const http = require('http');
 
 const usersRoute = require('./routes/UsersRoutes');
 const rafflesRoute = require('./routes/RafflesRoutes');
+const quotasRoute = require('./routes/QuotasRoutes');
+const categoriesRoutes = require('./routes/CategoriesRoutes');
 
-const enderecosRoutes = require('./routes/EnderecosRoutes');
-const subcategoriasRoutes = require('./routes/SubCategoriasRoutes');
-const categoriasRoutes = require('./routes/CategoriasRoutes');
 const rifasRoutes = require('./routes/RifasRoutes');
 const cotasRoutes = require('./routes/CotasRoutes');
 const imagensRoutes = require('./routes/ImagensRoutes');
@@ -41,10 +40,9 @@ app.set('view engine', 'ejs');
 
 app.use(usersRoute);
 app.use(rafflesRoute);
+app.use(quotasRoute);
+app.use(categoriesRoutes);
 
-app.use(enderecosRoutes);
-app.use(categoriasRoutes);
-app.use(subcategoriasRoutes);
 app.use(rifasRoutes);
 app.use(cotasRoutes);
 app.use(imagensRoutes);
