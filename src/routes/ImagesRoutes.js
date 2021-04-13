@@ -51,7 +51,7 @@ imagesRoute.post('/raffles/:id/images/:num', upload.single('image'), async (req,
     }
 });
 
-imagesRoute.post('/raffles/:id/quotas/:quotas/receipt', upload.single('image'), (req, res) => {
+imagesRoute.post('/raffles/:id/quotas/:quotas/receipt', upload.single('image'), async (req, res) => {
     const { id, quotas } = req.params;
     const data = id + '-' + quotas + '-' + req.file.filename;
 
