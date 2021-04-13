@@ -77,3 +77,13 @@ exports.connect = async function connect() {
 //     num INTEGER NOT null,
 //     file VARCHAR(255) NOT NULL
 // );
+
+// CREATE TABLE tb_payments (
+//     id SERIAL PRIMARY KEY,
+//     id_raffle INTEGER NOT null,
+//     id_user INTEGER NOT null,
+//     quotas VARCHAR(255) NOT NULL
+//     method INTEGER NOT null,
+//     value DECIMAL NOT null,
+//     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+// );

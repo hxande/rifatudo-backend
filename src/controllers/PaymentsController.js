@@ -1,5 +1,5 @@
 const MercadoPago = require('mercadopago');
-const PaymentsModel = require('../models/PaymentsModel');
+const db = require('../db.js');
 
 const getFullUrl = (req) => {
     const url = req.protocol + '://' + req.get('host');
@@ -52,9 +52,22 @@ module.exports = {
     }
 };
 
-module.exports.pay = function (data) {
-    function callback(idPayment) {
-        console.log('Payment ' + idPayment);
-    }
-    PaymentsModel.insertPayments(data, callback);
+module.exports.pay = async function (data, res) {
+    const sql = 'INSERT INTO tb_payments (id_raffle, id_user, quotas, meth, value) VALUES($1, $2, $3, $4, $5)';
+    const values = [data.raffle, data.user, data.quotas, data.method, data.value];
+    const arrayQuotas = data.quotas.split(',');
+
+    const client = await db.connect();
+    const response = await client.query(sql, values);
+
+
+    arrayQuotas.forEach(async (element, index) => {
+        const sqlUpdateQuota = `UPDATE tb_quotas SET id_user = ${data.user}, status = ${[2].includes(data.method) ? 1 : 3}, updated_at = now() WHERE id_raffle = ${data.raffle} AND num = ${element}`;
+        const responseUpdate = await client.query(sqlUpdateQuota);
+
+        if (index === (arrayQuotas.length - 1)) {
+            client.release();
+            res.sendStatus(200);
+        }
+    });
 };

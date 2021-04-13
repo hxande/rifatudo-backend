@@ -10,11 +10,11 @@ const usersRoute = require('./routes/UsersRoutes');
 const rafflesRoute = require('./routes/RafflesRoutes');
 const quotasRoute = require('./routes/QuotasRoutes');
 const categoriesRoutes = require('./routes/CategoriesRoutes');
+const imagesRoutes = require('./routes/ImagesRoutes');
+const paymentsRoutes = require('./routes/PaymentsRoutes');
 
 const rifasRoutes = require('./routes/RifasRoutes');
 const cotasRoutes = require('./routes/CotasRoutes');
-const imagensRoutes = require('./routes/ImagensRoutes');
-const pagamentosRoutes = require('./routes/PagamentosRoutes');
 const statementsRoutes = require('./routes/StatementsRoutes');
 const resultsRoutes = require('./routes/ResultsRoutes');
 const disputesRoutes = require('./routes/DisputesRoutes');
@@ -42,14 +42,14 @@ app.use(usersRoute);
 app.use(rafflesRoute);
 app.use(quotasRoute);
 app.use(categoriesRoutes);
+app.use(imagesRoutes);
 
 app.use(rifasRoutes);
 app.use(cotasRoutes);
-app.use(imagensRoutes);
 app.use(statementsRoutes);
 app.use(resultsRoutes);
 app.use(disputesRoutes);
-app.use('/payments', pagamentosRoutes);
+app.use('/payments', paymentsRoutes);
 app.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));
 
 server.listen(process.env.PORT || 3333);
