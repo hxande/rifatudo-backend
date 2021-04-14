@@ -1,27 +1,29 @@
 const nodemailer = require('nodemailer');
 
-const remetente = nodemailer.createTransport({
-    host: '',
-    service: '',
-    port: 587,
-    secure: true,
-    auth: {
-        user: 'seuEmail@email.com',
-        pass: 'suaSenha'
-    }
-});
+module.exports = (email, subject, text) => {
+    const remetente = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        // service: '',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'h.alexandre014@gmail.com',
+            pass: '********'
+        }
+    });
 
-const emailASerEnviado = {
-    from: 'seuEmail@email.com',
-    to: 'seuDestino@email.com',
-    subject: 'Enviando Email com Node.js',
-    text: 'Estou te enviando este email com node.js',
+    const emailASerEnviado = {
+        from: 'h.alexandre014@gmail.com',
+        to: `${email}`,
+        subject: `${subject}`,
+        html: `${text}`,
+    };
+
+    remetente.sendMail(emailASerEnviado, function (error) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email enviado com sucesso.');
+        }
+    });
 };
-
-remetente.sendMail(emailASerEnviado, function (error) {
-    if (error) {
-        console.log(error);
-    } else {
-        console.log('Email enviado com sucesso.');
-    }
-});
