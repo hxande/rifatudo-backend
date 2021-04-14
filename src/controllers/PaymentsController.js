@@ -18,7 +18,7 @@ module.exports = {
 
         const { id, email, description, amount } = req.params;
 
-        //Create purchase item object template
+        // Create purchase item object template
         const purchaseOrder = {
             items: [
                 item = {
@@ -42,7 +42,7 @@ module.exports = {
             }
         }
 
-        //Generate init_point to checkout
+        // Generate init_point to checkout
         try {
             const preference = await MercadoPago.preferences.create(purchaseOrder);
             return res.redirect(`${preference.body.init_point}`);

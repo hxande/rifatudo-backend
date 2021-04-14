@@ -13,9 +13,6 @@ const categoriesRoutes = require('./routes/CategoriesRoutes');
 const imagesRoutes = require('./routes/ImagesRoutes');
 const paymentsRoutes = require('./routes/PaymentsRoutes');
 
-const rifasRoutes = require('./routes/RifasRoutes');
-const cotasRoutes = require('./routes/CotasRoutes');
-const statementsRoutes = require('./routes/StatementsRoutes');
 const resultsRoutes = require('./routes/ResultsRoutes');
 const disputesRoutes = require('./routes/DisputesRoutes');
 

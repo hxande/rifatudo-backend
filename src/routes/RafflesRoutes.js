@@ -28,7 +28,7 @@ rafflesRoute.get('/raffles/:id', async (req, res) => {
     }
 });
 
-rafflesRoute.get('/rafflesP/users/:id', async (req, res) => {
+rafflesRoute.get('/raffles/users/:id', async (req, res) => {
     const { id } = req.params;
 
     try {

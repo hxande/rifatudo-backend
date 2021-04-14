@@ -61,34 +61,6 @@ exports.insertRaffle = async function (data) {
 
 
 
-
-
-
-
-
-
-
-
-exports.selectAllRifas = function (callback) {
-    RifasModel.selectAllRifas(callback);
-};
-
-// exports.selectRafflesByPage = function (page, callback) {
-//     RifasModel.selectRafflesByPage(page, callback);
-// };
-
-exports.selectIdRifas = function (idRifas, callback) {
-    RifasModel.selectIdRifas(idRifas, callback);
-};
-
-exports.selectMyRifas = function (idUsuarios, callback) {
-    RifasModel.selectMyRifas(idUsuarios, callback);
-};
-
-exports.deleteRifas = function (idRifas) {
-    RifasModel.deleteRifas(idRifas);
-};
-
 exports.checkStatus = function (raffle) {
     function callbackParent(qttMin) {
         function callback(count) {
