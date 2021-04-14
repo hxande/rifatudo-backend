@@ -1,7 +1,4 @@
 const db = require('../db.js');
-const RifasModel = require('../models/RifasModel');
-const CotasModel = require('../models/CotasModel');
-const CotasController = require('../controllers/CotasController');
 
 exports.selectRafflesByPage = async function (page, res) {
     let arrayResponse = [];
