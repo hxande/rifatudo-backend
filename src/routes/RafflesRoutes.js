@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const db = require('../db.js');
-const RifasController = require('../controllers/RifasController');
+const RafflesController = require('../controllers/RafflesController');
 
 const rafflesRoute = Router();
 
@@ -45,7 +45,7 @@ rafflesRoute.get('/raffles/pages/:page', async (req, res) => {
     const { page } = req.params;
 
     try {
-        RifasController.selectRafflesByPage(page, res);
+        RafflesController.selectRafflesByPage(page, res);
     } catch (error) {
         console.log('Erro [GET] [RAFFLES PAGES]', error);
     }
@@ -55,7 +55,7 @@ rafflesRoute.post('/raffles', async (req, res) => {
     const data = req.body;
 
     try {
-        const response = await RifasController.insertRaffle(data);
+        const response = await RafflesController.insertRaffle(data);
         res.json(response);
     } catch (error) {
         console.log('Erro [POST] [RAFFLES]', error);

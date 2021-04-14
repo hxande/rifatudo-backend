@@ -13,8 +13,6 @@ const categoriesRoutes = require('./routes/CategoriesRoutes');
 const imagesRoutes = require('./routes/ImagesRoutes');
 const paymentsRoutes = require('./routes/PaymentsRoutes');
 
-const resultsRoutes = require('./routes/ResultsRoutes');
-
 require('./config/getEnv')();
 
 const job = new cron('0 2 15 * * *', function () {
@@ -40,7 +38,6 @@ app.use(quotasRoute);
 app.use(categoriesRoutes);
 app.use(imagesRoutes);
 
-app.use(resultsRoutes);
 app.use('/payments', paymentsRoutes);
 app.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));
 
