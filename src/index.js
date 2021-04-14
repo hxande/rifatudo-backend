@@ -11,6 +11,7 @@ const rafflesRoute = require('./routes/RafflesRoutes');
 const quotasRoute = require('./routes/QuotasRoutes');
 const categoriesRoutes = require('./routes/CategoriesRoutes');
 const imagesRoutes = require('./routes/ImagesRoutes');
+const statementsRoutes = require('./routes/StatementsRoutes');
 const paymentsRoutes = require('./routes/PaymentsRoutes');
 
 require('./config/getEnv')();
@@ -37,6 +38,8 @@ app.use(rafflesRoute);
 app.use(quotasRoute);
 app.use(categoriesRoutes);
 app.use(imagesRoutes);
+app.use(categoriesRoutes);
+app.use(statementsRoutes);
 
 app.use('/payments', paymentsRoutes);
 app.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));
