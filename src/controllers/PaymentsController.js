@@ -52,7 +52,7 @@ module.exports = {
     }
 };
 
-module.exports.pay = async function (data, res) {
+module.exports.payConfirmed = async function (data, res) {
     const sql = 'INSERT INTO tb_payments (id_raffle, id_user, quotas, meth, value) VALUES($1, $2, $3, $4, $5)';
     const values = [data.raffle, data.user, data.quotas, data.method, data.value];
     const arrayQuotas = data.quotas.split(',');
@@ -60,9 +60,35 @@ module.exports.pay = async function (data, res) {
     const client = await db.connect();
     const response = await client.query(sql, values);
 
+    const sqlBuyer = 'INSERT INTO tb_statements (id_raffle, id_user, kind, value) VALUES($1, $2, $3, $4)';
+    const valuesBuyer = [data.raffle, data.user, 1, data.value - (0.25 * arrayQuotas.length)];
+    const responseBuyer = await client.query(sqlBuyer, valuesBuyer);
+
+    const sqlSeller = 'INSERT INTO tb_statements (id_raffle, id_user, kind, value) VALUES($1, $2, $3, $4)';
+    const valuesSeller = [data.raffle, data.user, 2, data.value - (0.25 * arrayQuotas.length)];
+    const responseSeller = await client.query(sqlSeller, valuesSeller);
 
     arrayQuotas.forEach(async (element, index) => {
-        const sqlUpdateQuota = `UPDATE tb_quotas SET id_user = ${data.user}, status = ${[2].includes(data.method) ? 1 : 3}, updated_at = now() WHERE id_raffle = ${data.raffle} AND num = ${element}`;
+        const sqlUpdateQuota = `UPDATE tb_quotas SET id_user = ${data.user}, status = 3, updated_at = now() WHERE id_raffle = ${data.raffle} AND num = ${element}`;
+        const responseUpdate = await client.query(sqlUpdateQuota);
+
+        if (index === (arrayQuotas.length - 1)) {
+            client.release();
+            res.sendStatus(200);
+        }
+    });
+};
+
+module.exports.payPending = async function (data, res) {
+    const sql = 'INSERT INTO tb_payments (id_raffle, id_user, quotas, meth, value) VALUES($1, $2, $3, $4, $5)';
+    const values = [data.raffle, data.user, data.quotas, data.method, data.value];
+    const arrayQuotas = data.quotas.split(',');
+
+    const client = await db.connect();
+    const response = await client.query(sql, values);
+
+    arrayQuotas.forEach(async (element, index) => {
+        const sqlUpdateQuota = `UPDATE tb_quotas SET id_user = ${data.user}, status = 1, updated_at = now() WHERE id_raffle = ${data.raffle} AND num = ${element}`;
         const responseUpdate = await client.query(sqlUpdateQuota);
 
         if (index === (arrayQuotas.length - 1)) {

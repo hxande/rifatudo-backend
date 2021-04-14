@@ -87,3 +87,12 @@ exports.connect = async function connect() {
 //     value DECIMAL NOT null,
 //     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 // );
+
+// CREATE TABLE tb_statements (
+//     id SERIAL PRIMARY KEY,
+//     id_raffle INTEGER NOT null,
+//     id_user INTEGER NOT null,
+//     kind INTEGER NOT null,
+//     value DECIMAL NOT null,
+//     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+// );

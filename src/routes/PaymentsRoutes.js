@@ -18,11 +18,21 @@ paymentsRoute.get('/failure', (req, res) => {
     return res.render('falhaScreen')
 });
 
-paymentsRoute.post('/pay', authMiddleware, async (req, res) => {
+paymentsRoute.post('/pay/confirmed', authMiddleware, async (req, res) => {
     const data = req.body;
 
     try {
-        const response = await PaymentsController.pay(data, res);
+        const response = await PaymentsController.payConfirmed(data, res);
+    } catch (error) {
+        console.log('Erro [POST] [PAYMENTS]', error);
+    }
+});
+
+paymentsRoute.post('/pay/pending', authMiddleware, async (req, res) => {
+    const data = req.body;
+
+    try {
+        const response = await PaymentsController.payPending(data, res);
     } catch (error) {
         console.log('Erro [POST] [PAYMENTS]', error);
     }
