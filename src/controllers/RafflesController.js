@@ -18,7 +18,7 @@ exports.selectRafflesByPage = async function (page, res) {
 
         const sqlImage = `SELECT * FROM tb_images WHERE id_raffle = ${row.id} AND num = 1`;
         const responseImage = await client.query(sqlImage);
-        newRow.imageUrl = `http://192.168.0.10:3333/uploads/${responseImage.rows[0].file}`;
+        newRow.imageUrl = `https://rifatudo-backend.herokuapp.com/uploads/${responseImage.rows[0].file}`;
 
         const deadline = new Date(row.updated_at.toLocaleDateString().slice(0, 10));
         const deadlineAdd = deadline.setDate(deadline.getDate() + row.duration);
