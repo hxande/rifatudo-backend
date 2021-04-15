@@ -26,7 +26,7 @@ imagesRoute.get('/raffles/:id/images', async (req, res) => {
         const response = await client.query(`SELECT * FROM tb_images WHERE id_raffle = ${id}`);
         client.release();
         response.rows.map(row => {
-            row.file = `https://rifatudo-backend.herokuapp.com/uploads/${row.file}`
+            row.file = `http://192.168.0.10:3333/uploads/${row.file}`
         })
         res.json(response.rows);
     } catch (error) {
