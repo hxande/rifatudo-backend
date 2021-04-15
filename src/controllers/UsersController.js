@@ -17,7 +17,7 @@ exports.insertUser = async function (data) {
 };
 
 exports.authUser = async function (username, pass, res) {
-    const sql = `SELECT * FROM tb_users WHERE username = '${username}'`;
+    const sql = `SELECT * FROM tb_users WHERE LOWER(username) = LOWER('${username}')`;
 
     const client = await db.connect();
     const response = await client.query(sql);
