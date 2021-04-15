@@ -1,4 +1,5 @@
 const db = require('../db.js');
+const QuotasController = require('../controllers/QuotasController');
 
 exports.selectRafflesByPage = async function (page, res) {
     let arrayResponse = [];
@@ -49,7 +50,7 @@ exports.insertRaffle = async function (data) {
         cota.num = index;
         cota.status = 0;
         cota.value = index < data.qtt_free ? 0 : quotaValue;
-        CotasController.insertQuota(cota);
+        QuotasController.insertQuota(cota);
     }
 
     return response;
