@@ -7,13 +7,13 @@ module.exports = (email, subject, text) => {
         port: 465,
         secure: true,
         auth: {
-            user: 'h.alexandre014@gmail.com',
-            pass: '********'
+            user: 'rifatudoapp@gmail.com',
+            pass: 'rabbit2021'
         }
     });
 
     const emailASerEnviado = {
-        from: 'h.alexandre014@gmail.com',
+        from: 'rifatudoapp@gmail.com',
         to: `${email}`,
         subject: `${subject}`,
         html: `${text}`,

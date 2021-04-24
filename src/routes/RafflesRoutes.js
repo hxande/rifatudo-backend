@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const db = require('../db.js');
 const RafflesController = require('../controllers/RafflesController');
+const mailService = require('../config/mail');
+const mailNewRaffle = require('../assets/mails/mail_newRaffle');
 
 const rafflesRoute = Router();
 
@@ -56,6 +58,7 @@ rafflesRoute.post('/raffles', async (req, res) => {
 
     try {
         const response = await RafflesController.insertRaffle(data);
+        mailService(data.mail, `RIFATUDO - Rifa Criada #${response.rows[0].id}`, mailNewRaffle());
         res.json(response);
     } catch (error) {
         console.log('Erro [POST] [RAFFLES]', error);
