@@ -65,7 +65,7 @@ module.exports.payConfirmed = async function (data, res) {
     const responseBuyer = await client.query(sqlBuyer, valuesBuyer);
 
     const sqlSeller = 'INSERT INTO tb_statements (id_raffle, id_user, kind, value) VALUES($1, $2, $3, $4)';
-    const valuesSeller = [data.raffle, data.user, 2, data.value - (0.25 * arrayQuotas.length)];
+    const valuesSeller = [data.raffle, data.owner, 2, data.value - (0.25 * arrayQuotas.length)];
     const responseSeller = await client.query(sqlSeller, valuesSeller);
 
     arrayQuotas.forEach(async (element, index) => {
