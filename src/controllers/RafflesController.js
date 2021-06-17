@@ -18,7 +18,6 @@ exports.selectRafflesByPage = async function (page, res) {
 
         const sqlImage = `SELECT * FROM tb_images WHERE id_raffle = ${row.id} AND num = 1`;
         const responseImage = await client.query(sqlImage);
-        console.log(responseImage);
         newRow.imageUrl = `http://rifatudo.s3-website-us-east-1.amazonaws.com/${responseImage.rows[0].file}`;
 
         const deadline = new Date(row.updated_at.toLocaleDateString().slice(0, 10));
