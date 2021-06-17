@@ -55,12 +55,14 @@ imagesRoute.post('/raffles/:id/images/:num', multer(multerConfig).single('image'
     }
 });
 
-imagesRoute.post('/raffles/:id/quotas/:quotas/receipt', upload.single('image'), async (req, res) => {
+imagesRoute.post('/raffles/:id/quotas/:quotas/receipt', multer(multerConfig).single('image'), async (req, res) => {
     const { id, quotas } = req.params;
-    const data = id + '-' + quotas + '-' + req.file.filename;
+    // const data = id + '-' + quotas + '-' + req.file.filename;
+    const { originalname: name, size, key, location: url = "" } = req.file;
+
 
     const sql = 'INSERT INTO tb_images (id_raffle, num, file) VALUES($1, $2, $3)';
-    const values = [id, 0, data];
+    const values = [id, 0, key];
 
     try {
         const client = await db.connect();

@@ -20,8 +20,8 @@ const storageTypes = {
         },
     }),
     s3: multerS3({
-        s3: new aws.S3({ region: process.env.AWS_REGION }),
-        bucket: process.env.AWS_S3_BUCKET,
+        s3: new aws.S3({ apiVersion: '2006-03-01', region: 'us-east-1', accessKeyId: 'AKIAWUDM6FU2LHVM7L7E', secretAccessKey: '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' }),
+        bucket: 'rifatudo',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: (req, file, cb) => {
@@ -36,7 +36,7 @@ const storageTypes = {
 
 module.exports = {
     dest: path.resolve(__dirname, '..', '..', '..', '..', '..', 'ubuntu', 'S3'),
-    storage: storageTypes[process.env.STORAGE_TYPE],
+    storage: 's3',
     limits: {
         fileSize: MAX_SIZE_TWO_MEGABYTES,
     },
