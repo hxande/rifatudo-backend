@@ -37,7 +37,6 @@ imagesRoute.get('/raffles/:id/images', async (req, res) => {
 
 // imagesRoute.post('/raffles/:id/images/:num', upload.single('image'), async (req, res) => {
 imagesRoute.post('/raffles/:id/images/:num', multer(multerConfig).single('image'), async (req, res) => {
-
     const { id, num } = req.params;
     // const data = req.file.filename;
     const { originalname: name, size, key, location: url = "" } = req.file;

@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const aws = require('aws-sdk');
 const multerS3 = require('multer-s3');
 
-const MAX_SIZE_TWO_MEGABYTES = 2 * 1024 * 1024;
+const MAX_SIZE_TWO_MEGABYTES = 10 * 1024 * 1024;
 
 aws.config.update({
     credentials: {
