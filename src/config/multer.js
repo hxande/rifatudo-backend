@@ -9,7 +9,7 @@ const MAX_SIZE_TWO_MEGABYTES = 2 * 1024 * 1024;
 const storageTypes = {
     local: multer.diskStorage({
         destination: (req, file, cb) => {
-            cb(null, path.resolve(__dirname, '..', '..', '..', '..', '..', 'ubuntu', 'S3'));
+            cb(null, path.resolve(__dirname, '..', 'uploads'));
         },
         filename: (req, file, cb) => {
             crypto.randomBytes(16, (err, hash) => {
@@ -35,8 +35,8 @@ const storageTypes = {
 };
 
 module.exports = {
-    dest: path.resolve(__dirname, '..', '..', '..', '..', '..', 'ubuntu', 'S3'),
-    storage: 's3',
+    dest: path.resolve(__dirname, '..', 'uploads'),
+    storage: storageTypes.s3,
     limits: {
         fileSize: MAX_SIZE_TWO_MEGABYTES,
     },

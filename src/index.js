@@ -42,6 +42,6 @@ app.use(categoriesRoutes);
 app.use(statementsRoutes);
 
 app.use('/payments', paymentsRoutes);
-app.use('/uploads', express.static(path.resolve(__dirname, '..', '..', '..', '..', 'ubuntu', 'S3')));
+// app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
 
 server.listen(process.env.PORT || 3333);
